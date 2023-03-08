@@ -13,71 +13,70 @@
 */
 
 interface AbstractFurnitureFactory {
-    createChair(): Chair;
-    createSofa(): Sofa;
+  createChair(): Chair;
+  createSofa(): Sofa;
 }
 
 class ModernFurnitureFactory implements AbstractFurnitureFactory {
-    createChair(): Chair {
-        return new ModernChair();
-    }
+  createChair(): Chair {
+    return new ModernChair();
+  }
 
-    createSofa(): Sofa {
-        return new ModernSofa();
-    }
+  createSofa(): Sofa {
+    return new ModernSofa();
+  }
 }
 
 class classicFurnitureFactory implements AbstractFurnitureFactory {
-    createChair(): Chair {
-        return new classicChair();
-    }
+  createChair(): Chair {
+    return new classicChair();
+  }
 
-    createSofa(): Sofa {
-        return new classicSofa();
-    }
+  createSofa(): Sofa {
+    return new classicSofa();
+  }
 }
 
 interface Chair {
-    use(): void;
-
+  use(): void;
 }
 
 class ModernChair implements Chair {
-    public use(): void {
-        console.log('모던한 체어를 사용 중입니다.');
-    }
+  public use(): void {
+    console.log("모던한 체어를 사용 중입니다.");
+  }
 }
 
 class classicChair implements Chair {
-    public use(): void {
-        console.log('클래식한 체어를 사용 중입니다.');
-    }
+  public use(): void {
+    console.log("클래식한 체어를 사용 중입니다.");
+  }
 }
 
 interface Sofa {
-    use(): void;
+  use(): void;
 }
 
 class ModernSofa implements Sofa {
-    public use(): void {
-        console.log('모던한 소파를 사용 중입니다.');
-    }
+  public use(): void {
+    console.log("모던한 소파를 사용 중입니다.");
+  }
 }
 
 class classicSofa implements Sofa {
-    public use(): void {
-        console.log('클래식한 소파를 사용 중입니다.');
-    }
+  public use(): void {
+    console.log("클래식한 소파를 사용 중입니다.");
+  }
 }
 
 function abstractFactoryClientCode(factory: AbstractFurnitureFactory): void {
-    const chair: Chair = factory.createChair();
-    const sofa: Sofa = factory.createSofa();
+  const chair: Chair = factory.createChair();
+  const sofa: Sofa = factory.createSofa();
 
-    chair.use();
-    sofa.use();
+  chair.use();
+  sofa.use();
 }
 
 abstractFactoryClientCode(new ModernFurnitureFactory());
-console.log('');
+console.log("");
 abstractFactoryClientCode(new classicFurnitureFactory());

@@ -15,86 +15,86 @@
 */
 
 interface AbstractHouseBuilder {
-    buildWalls(): void;
-    buildDoors(): void;
-    buildWindows(): void;
+  buildWalls(): void;
+  buildDoors(): void;
+  buildWindows(): void;
 }
 
 class ConcreteHouseBuilder implements AbstractHouseBuilder {
-    private house: House;
+  private house: House;
 
-    constructor() {
-        this.reset();
-    }
+  constructor() {
+    this.reset();
+  }
 
-    reset(): void {
-        this.house = new House();
-    }
+  reset(): void {
+    this.house = new House();
+  }
 
-    buildWalls(): void {
-        this.house.parts.push('wall');
-    }
+  buildWalls(): void {
+    this.house.parts.push("wall");
+  }
 
-    buildDoors(): void {
-        this.house.parts.push('door');
-    }
+  buildDoors(): void {
+    this.house.parts.push("door");
+  }
 
-    buildWindows(): void {
-        this.house.parts.push('window');
-    }
+  buildWindows(): void {
+    this.house.parts.push("window");
+  }
 
-    getHouse(): House {
-        const result = this.house;
-        this.reset();
-        return result;
-    }
+  getHouse(): House {
+    const result = this.house;
+    this.reset();
+    return result;
+  }
 }
 
 class House {
-    public parts: string[] = [];
+  public parts: string[] = [];
 
-    public listParts(): void {
-        console.log(`House parts: ${this.parts.join(', ')}\n`);
-    }
+  public listParts(): void {
+    console.log(`House parts: ${this.parts.join(", ")}\n`);
+  }
 }
 
 class Director {
-    private builder: AbstractHouseBuilder;
+  private builder: AbstractHouseBuilder;
 
-    public setBuilder(builder: AbstractHouseBuilder): void {
-        this.builder = builder;
-    }
+  public setBuilder(builder: AbstractHouseBuilder): void {
+    this.builder = builder;
+  }
 
-    public buildMinimalBuiltInHouse(): void {
-        this.builder.buildDoors();
-        this.builder.buildWalls();
-    }
+  public buildMinimalBuiltInHouse(): void {
+    this.builder.buildDoors();
+    this.builder.buildWalls();
+  }
 
-    public buildFullBuiltInHouse(): void {
-        this.builder.buildDoors();
-        this.builder.buildWalls();
-        this.builder.buildWindows();
-    }
+  public buildFullBuiltInHouse(): void {
+    this.builder.buildDoors();
+    this.builder.buildWalls();
+    this.builder.buildWindows();
+  }
 }
 
 function builderClientCode(director: Director): void {
-    const builder = new ConcreteHouseBuilder();
-    director.setBuilder(builder);
+  const builder = new ConcreteHouseBuilder();
+  director.setBuilder(builder);
 
-    console.log('Basic option home');
-    builder.reset();
-    director.buildMinimalBuiltInHouse();
-    builder.getHouse().listParts();
+  console.log("Basic option home");
+  builder.reset();
+  director.buildMinimalBuiltInHouse();
+  builder.getHouse().listParts();
 
-    console.log('Full option home');
-    builder.reset();
-    director.buildFullBuiltInHouse();
-    builder.getHouse().listParts();
+  console.log("Full option home");
+  builder.reset();
+  director.buildFullBuiltInHouse();
+  builder.getHouse().listParts();
 
-    console.log('House without director');
-    builder.reset();
-    builder.buildDoors();
-    builder.getHouse().listParts();
+  console.log("House without director");
+  builder.reset();
+  builder.buildDoors();
+  builder.getHouse().listParts();
 }
 
 builderClientCode(new Director());
